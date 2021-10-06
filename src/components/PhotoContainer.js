@@ -1,24 +1,19 @@
 import React, { Component } from "react";
 import NotFound from "./NotFound";
 import Photo from "./Photo";
-import axios from "axios";
-import apiKey from "../config";
+
+
 class PhotoContainer extends Component{
     state = {
         photos: [],
         loading: true
     }
-    componentDidMount(){
-        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=${apiKey}&per_page=24&format=json&nojsoncallback=1`)
-        .then(response => {
-          this.setState({
-            photos: response.data.photos.photo,
-            loading: false})
-
-        }).catch(error => {
-          console.log("Error fetching data", error)
-        })
-    }
+   componentDidMount(){
+       this.setState({
+           photos: this.props.data,
+           loading: false
+       })
+   }
     displayPhotos() {
         const photos = this.state.photos
         let data
