@@ -15,7 +15,7 @@ handleSubmit = e => {
   let searchString = this.state.searchString.replace(' ', '+')
   let path = `/search/${searchString}`
   this.props.onSearch(searchString)
-  
+  document.title = `Search results for ${this.state.searchString}`
   this.props.history.push(path)
   e.currentTarget.reset()
 }

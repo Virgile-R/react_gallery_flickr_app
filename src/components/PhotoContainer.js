@@ -5,18 +5,22 @@ import Photo from "./Photo";
 
 class PhotoContainer extends Component{
     state = {
-        photos: JSON.parse(window.localStorage.getItem('state')) || this.props.data,
-        loading: true
+        photos: JSON.parse(window.localStorage.getItem('photos')) || this.props.data,
+        loading: true,
+        title: JSON.parse(window.localStorage.getItem('title')) || this.props.title
     }
    
     componentDidUpdate(prevProps){
+           
         if (this.props.data !== prevProps.data){
-            window.localStorage.setItem('state', JSON.stringify(this.props.data))
+            window.localStorage.setItem('photos', JSON.stringify(this.props.data))
+            window.localStorage.setItem('title', JSON.stringify(this.props.title))
             this.setState({
                 photos: this.props.data,
-                loading: false              
+                title: this.props.title,
+                 
             })
-            
+        
         } 
     }
 
@@ -24,7 +28,7 @@ class PhotoContainer extends Component{
     displayPhotos() {
         const photos = this.state.photos
         let data
-        
+        document.title = `Search results for ${this.state.title}`    
         if ( photos.length > 0) {
           data =  photos.map( photo =>
                
@@ -44,7 +48,7 @@ class PhotoContainer extends Component{
         
         return (
             <div className="photo-container">
-                <h2>Results</h2>
+                <h2>Results for {this.state.title} </h2>
                 <ul>
                
                 {this.displayPhotos()}

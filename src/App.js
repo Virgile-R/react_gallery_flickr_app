@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {  Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import axios from "axios";
@@ -11,7 +11,13 @@ import PhotoContainer from "./components/PhotoContainer";
 class App extends Component {
   state = {
     photos: [],
+    title: 'Flickr API Photo Search'
   };
+
+  componentDidMount(){
+    document.title= this.state.title
+  }
+  
 
   performSearch =  (query) => {
      axios
@@ -21,6 +27,8 @@ class App extends Component {
       .then((response) => {
         this.setState({
           photos: response.data.photos.photo,
+          title: query
+
         });
       })
       .catch((error) => {
@@ -37,10 +45,10 @@ class App extends Component {
           
           <Nav  />
           <Switch>
-           <Route path="/search/cats" render={() => <PhotoContainer data={subjectsData.cats}/>}/>
-           <Route path="/search/dogs" render={() => <PhotoContainer data={subjectsData.dogs}/>}/>
-           <Route path="/search/otters" render={() => <PhotoContainer data={subjectsData.otters}/>}/>
-           <Route path="/search/:searchstring" render={() => <PhotoContainer data={this.state.photos}/>} />
+           <Route path="/search/cats" render={() => <PhotoContainer data={subjectsData.cats} title={"cats"}/>}/>
+           <Route path="/search/dogs" render={() => <PhotoContainer data={subjectsData.dogs} title={"dogs"}/>}/>
+           <Route path="/search/otters" render={() => <PhotoContainer data={subjectsData.otters} title={"otters"}/>}/>
+           <Route path="/search/:searchstring" render={() => <PhotoContainer data={this.state.photos} title={this.state.title}/>} />
            
                      
           </Switch>
