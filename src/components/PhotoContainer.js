@@ -30,7 +30,7 @@ class PhotoContainer extends Component{
         let data
            
         if (photos.length > 0) {
-            document.title = `Search results for ${this.state.title}` 
+            document.title = `Search results for ${this.state.title.replace('+', ' ')}` 
                 data =  photos.map( photo =>
                
                     <Photo url={

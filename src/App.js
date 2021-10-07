@@ -49,23 +49,23 @@ class App extends Component {
  
 
   render() {
-    
+    let photos = this.state.photos
     return (
       <BrowserRouter>
         <div className="App">
           <SearchForm onSearch={this.performSearch}/>
           
           <Nav  />
-          {this.state.loading ? <Loading />: 
+         
           <Switch>
            <Route exact path="/"/>
            <Route path="/search/cats" render={() => <PhotoContainer data={subjectsData.cats} title={"cats"} />}/>
            <Route path="/search/dogs" render={() => <PhotoContainer data={subjectsData.dogs} title={"dogs"} />}/>
            <Route path="/search/otters" render={() => <PhotoContainer data={subjectsData.otters} title={"otters"} />}/>
-           <Route path="/search/:searchstring" render={() => <PhotoContainer data={this.state.photos} title={this.state.title} />} />
+           {photos ? <Route path="/search/:searchstring" render={() => <PhotoContainer data={this.state.photos} title={this.state.title} />}/>: <Loading/>}
            <Route component={PageNotFound} />
                      
-          </Switch>}
+          </Switch>
           
           
          
