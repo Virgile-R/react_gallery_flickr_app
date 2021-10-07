@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import axios from "axios";
-
+import subjectsData from "./data";
 import apiKey from "./config";
 import SearchForm from "./components/SearchForm";
 import Nav from "./components/Nav";
@@ -37,12 +37,15 @@ class App extends Component {
           
           <Nav  />
           <Switch>
-           
+           <Route path="/search/cats" render={() => <PhotoContainer data={subjectsData.cats}/>}/>
+           <Route path="/search/dogs" render={() => <PhotoContainer data={subjectsData.dogs}/>}/>
+           <Route path="/search/otters" render={() => <PhotoContainer data={subjectsData.otters}/>}/>
+           <Route path="/search/:searchstring" render={() => <PhotoContainer data={this.state.photos}/>} />
            
                      
           </Switch>
           
-          <Route path="/search/:searchstring" render={() => <PhotoContainer data={this.state.photos}/>} />
+          
          
         </div>
       </BrowserRouter>

@@ -5,18 +5,22 @@ import Photo from "./Photo";
 
 class PhotoContainer extends Component{
     state = {
-        photos: this.props.data,
+        photos: JSON.parse(window.localStorage.getItem('state')) || this.props.data,
         loading: true
     }
-  
+   
     componentDidUpdate(prevProps){
         if (this.props.data !== prevProps.data){
+            window.localStorage.setItem('state', JSON.stringify(this.props.data))
             this.setState({
-                photos: this.props.data
+                photos: this.props.data,
+                loading: false              
             })
-        }
-
+            
+        } 
     }
+
+    
     displayPhotos() {
         const photos = this.state.photos
         let data
