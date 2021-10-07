@@ -6,7 +6,7 @@ import Photo from "./Photo";
 class PhotoContainer extends Component{
     state = {
         photos: JSON.parse(window.localStorage.getItem('photos')) || this.props.data,
-        loading: true,
+        
         title: JSON.parse(window.localStorage.getItem('title')) || this.props.title
     }
    
@@ -25,19 +25,19 @@ class PhotoContainer extends Component{
     }
 
     
-    displayPhotos() {
-        const photos = this.state.photos
+     displayPhotos() {
+        const photos =  this.state.photos
         let data
-        document.title = `Search results for ${this.state.title}`    
-        if ( photos.length > 0) {
-          data =  photos.map( photo =>
+           
+        if (photos.length > 0) {
+            document.title = `Search results for ${this.state.title}` 
+                data =  photos.map( photo =>
                
-                <Photo url={
-`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} key={photo.id} alt={photo.title} />
-            )}else if (this.state.loading) {
-                data = <p>Loading...</p>
+                    <Photo url={
+    `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} key={photo.id} alt={photo.title} />
                 
-            } else {
+                
+                )} else {
                 data = <NotFound />
             }
         return data
@@ -46,9 +46,10 @@ class PhotoContainer extends Component{
 
     render() {
         
+     
         return (
             <div className="photo-container">
-                <h2>Results for {this.state.title} </h2>
+                <h2>Results for {this.state.title.replace('+', ' ')} </h2>
                 <ul>
                
                 {this.displayPhotos()}

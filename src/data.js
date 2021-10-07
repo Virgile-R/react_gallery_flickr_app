@@ -7,11 +7,11 @@ const subjectsData = [{
 }]
 
 
-get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`).then(response => {subjectsData.cats = response.data.photos.photo})
+get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`).then(response => {subjectsData.cats = response.data.photos.photo}).catch((error) => console.log(error))
 
-get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`).then(response => {subjectsData.dogs =response.data.photos.photo})
+get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`).then(response => {subjectsData.dogs =response.data.photos.photo}).catch((error) => console.log(error))
 
- get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=otters&per_page=24&format=json&nojsoncallback=1`).then(response => {subjectsData.otters =response.data.photos.photo})
+ get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=otters&per_page=24&format=json&nojsoncallback=1`).then(response => {subjectsData.otters =response.data.photos.photo}).catch((error) => console.log(error))
 
 
 export default subjectsData
