@@ -5,15 +5,18 @@ import Photo from "./Photo";
 
 class PhotoContainer extends Component{
     state = {
-        photos: [],
+        photos: this.props.data,
         loading: true
     }
-   componentDidMount(){
-       this.setState({
-           photos: this.props.data,
-           loading: false
-       })
-   }
+  
+    componentDidUpdate(prevProps){
+        if (this.props.data !== prevProps.data){
+            this.setState({
+                photos: this.props.data
+            })
+        }
+
+    }
     displayPhotos() {
         const photos = this.state.photos
         let data
