@@ -1,23 +1,25 @@
 import React, { Component } from "react";
+import Loading from "./Loading";
 import NotFound from "./NotFound";
 import Photo from "./Photo";
 
 
 class PhotoContainer extends Component{
     state = {
-        photos: JSON.parse(window.localStorage.getItem('photos')) || this.props.data,
-        
-        title: JSON.parse(window.localStorage.getItem('title')) || this.props.title
+        photos: this.props.data,
+        loading: true,
+        title: this.props.title
     }
-   
+    
     componentDidUpdate(prevProps){
+        
            
-        if (this.props.data !== prevProps.data){
-            window.localStorage.setItem('photos', JSON.stringify(this.props.data))
-            window.localStorage.setItem('title', JSON.stringify(this.props.title))
+        if (this.props.data && this.props.data !== prevProps.data){
+            
             this.setState({
                 photos: this.props.data,
                 title: this.props.title,
+                loading: false
                  
             })
         
@@ -26,10 +28,12 @@ class PhotoContainer extends Component{
 
     
      displayPhotos() {
-        const photos =  this.state.photos
+        const photos = this.state.photos
         let data
-           
-        if (photos.length > 0) {
+        if (this.props.loading){
+            data = <Loading />
+        }   
+        else if (photos.length > 0) {
             document.title = `Search results for ${this.state.title.replace('+', ' ')}` 
                 data =  photos.map( photo =>
                
@@ -49,10 +53,10 @@ class PhotoContainer extends Component{
      
         return (
             <div className="photo-container">
-                <h2>Results for {this.state.title.replace('+', ' ')} </h2>
+                {this.state.loading ? <h2>Loading...</h2>: <h2>Results for {this.state.title.replace('+', ' ')} </h2>}
                 <ul>
                
-                {this.displayPhotos()}
+               {this.displayPhotos()} 
 
                 </ul>
             </div>
