@@ -15,7 +15,7 @@ class PhotoContainer extends Component {
         photos: this.props.data,
         title: this.props.title,
       });
-    } else if (this.props.data.length === 0 && this.props.params) {
+    } else if (this.props.params) {
       this.props.onSearch(this.props.params.searchstring);
     }
   }
