@@ -9,6 +9,7 @@ class PhotoContainer extends Component {
     title: this.props.title,
   };
 
+  //handle what the component should do when it updates: if props.data changes, sets state.data to the new props data. If no data (for example when refreshing) performs a search
   componentDidUpdate(prevProps) {
     if (this.props.data && this.props.data !== prevProps.data) {
       this.setState({
@@ -19,7 +20,7 @@ class PhotoContainer extends Component {
       this.props.onSearch(this.props.params.searchstring);
     }
   }
-
+// uses state.photo to display the photos. Renders a Photo component for each photo in the array or a Not Found if the array is empty
   displayPhotos() {
     const photos = this.state.photos;
     let data;

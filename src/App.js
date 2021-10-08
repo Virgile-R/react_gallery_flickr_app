@@ -16,14 +16,14 @@ class App extends Component {
     title: "Flickr API Photo Search",
     loading: false,
   };
-
+//Handles refresh by resetting the loading and title state
   componentDidMount() {
     document.title = this.state.title;
     this.setState({
       loading: false,
     });
   }
-
+//Perfoms the search by setting loading to true, then calling the FlickR API and setting the loading to False when the response is recieved
   performSearch = (query) => {
     this.setState({
       loading: true,
@@ -43,7 +43,7 @@ class App extends Component {
         console.log("Error fetching data", error);
       });
   };
-
+//Renders the routes. if current state.loading is set to True, shows a loading page. Any other routes returns a 404 Error page 
   render() {
     return (
       <BrowserRouter>
